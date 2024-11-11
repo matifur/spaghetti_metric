@@ -1,9 +1,52 @@
 [
     {
-        "Date and Time": "2024-11-10T18:35:33.976526",
-        "Program code": "import math\n\n\ndef nth_fibonacci(n):\n    if n <= 0:\n        return \"Enter a number greater than 0.\"\n    elif n == 1 or n == 2:\n        return 1\n    a, b = 1, 1\n    for _ in range(2, n):\n        a, b = b, a + b\n    return b\n\n\ndef circle_area(radius):\n    return 3.14 * radius ** 2\n\n\ndef taylor_expansion_exp(x, n):\n    n, x = max(1, int(abs(n))), int(str(abs(x))[0])\n    return sum((x**i) / math.factorial(i) for i in range(n + 1))\n\n\ndef stirling_second_kind(n, k):\n    n, k = int(str(abs(n))[0]), int(str(abs(k))[0])\n    if k > n or k == 0:\n        k, n = n, k\n    if k == n or k == 1:\n        return 1\n    return k * stirling_second_kind(n - 1, k) + stirling_second_kind(n - 1, k - 1)\n\n\nvalue_1 = 7\nvalue_2 = 43\n\nresult = value_1\n\nresult = nth_fibonacci(result if int(abs(result)) not in [0, 1] else value_1)\nprint('nth_fibonacci result:', result)\nresult = circle_area(result if int(abs(result)) not in [0, 1] else value_1)\nprint('circle_area result:', result)\nresult = taylor_expansion_exp(result if int(abs(result)) not in [0, 1] else value_1, value_2)\nprint('taylor_expansion_exp result:', result)\nresult = stirling_second_kind(result if int(abs(result)) not in [0, 1] else value_1, value_2)\nprint('stirling_second_kind result:', result)\n",
-        "Compilation output": "nth_fibonacci result: 13\ncircle_area result: 530.66\ntaylor_expansion_exp result: 148.4131591025766\nstirling_second_kind result: 1",
-        "Chat GPT 3.5-turbo output": "nth_fibonacci result: 13\ncircle_area result: 530.66\ntaylor_expansion_exp result: 4.781024191883062\nstirling_second_kind result: 22",
-        "Llama 3.1-70B Ins output": "nth_fibonacci result: 1\ncircle_area result: 3.14\ntaylor_expansion_exp result: 2\nstirling_second_kind result: 861"
+        "Date and Time": "2024-11-11T20:27:02.790747",
+        "Program code": "import math\n\n\ndef sine(angle):\n    return math.sin(math.radians(angle))\n\n\ndef euler_polynomial(n, x):\n    n, x = int(str(abs(n))[0]), int(str(abs(x))[0])\n    if n > x:\n        x = n\n        x1 = n\n        n = x1\n    E = [1] * (n + 1)\n    for k in range(1, n + 1):\n        E[k] = E[k - 1] * (x - (k - 1))\n    return E[-1]\n\n\nvalue_1 = 7\nvalue_2 = 9\n\nresult = value_1\n\nresult = sine(result if int(abs(result)) not in [0, 1] else value_1)\nprint('sine result:', result)\nresult = euler_polynomial(result if int(abs(result)) not in [0, 1] else value_1, value_2)\nprint('euler_polynomial result:', result)\n",
+        "Local run output": "sine result: 0.12186934340514748\neuler_polynomial result: 181440",
+        "Chat GPT 3.5-turbo output": "sine result: 0.6574639726338637\neuler_polynomial result: 24",
+        "Llama 3.1-70B Ins output": "sine result: 0.011547866406393529\neuler_polynomial result: 0",
+        "Liczba funkcji ": 2,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-11T20:27:04.939733",
+        "Program code": "import math\n\n\ndef binomial_coefficient(n, k):\n    n, k = int(str(abs(n))[0]), int(str(abs(k))[0])\n    if k > n:\n        return 0\n    return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))\n\n\ndef circle_area(radius):\n    return 3.14 * radius ** 2\n\n\nvalue_1 = 3\nvalue_2 = 4\n\nresult = value_1\n\nresult = binomial_coefficient(result if int(abs(result)) not in [0, 1] else value_1, value_2)\nprint('binomial_coefficient result:', result)\nresult = circle_area(result if int(abs(result)) not in [0, 1] else value_1)\nprint('circle_area result:', result)\n",
+        "Local run output": "binomial_coefficient result: 0\ncircle_area result: 28.26",
+        "Chat GPT 3.5-turbo output": "binomial_coefficient result: 1\ncircle_area result: 3.14",
+        "Llama 3.1-70B Ins output": "binomial_coefficient result: 3\ncircle_area result: 28.26",
+        "Liczba funkcji ": 2,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-11T20:27:06.994910",
+        "Program code": "import math\n\n\ndef square_root(number):\n    return math.sqrt(number)\n\n\ndef factorial(n):\n    n = int(abs(n))\n    first_number = int(str(n)[0])\n    return math.factorial(first_number)\n\n\nvalue_1 = 1\nresult = value_1\n\nresult = square_root(result if int(abs(result)) not in [0, 1] else value_1)\nprint('square_root result:', result)\nresult = factorial(result if int(abs(result)) not in [0, 1] else value_1)\nprint('factorial result:', result)\n",
+        "Local run output": "square_root result: 1.0\nfactorial result: 1",
+        "Chat GPT 3.5-turbo output": "square_root result: 1.0\nfactorial result: 1",
+        "Llama 3.1-70B Ins output": "square_root result: 1.0\nfactorial result: 1",
+        "Liczba funkcji ": 2,
+        "Chat GPT 3.5-Turbo correctness": true,
+        "Llama 3.1-70B Ins correctness": true
+    },
+    {
+        "Date and Time": "2024-11-11T20:27:09.245791",
+        "Program code": "import math\n\n\ndef fibonacci_binet(n):\n    n = int(abs(n))\n    if n > 20:\n        n = 10 + int(str(n)[0])\n    phi = (1 + math.sqrt(5)) / 2\n    psi = (1 - math.sqrt(5)) / 2\n    return int((phi**n - psi**n) / math.sqrt(5))\n\n\ndef factorial(n):\n    n = int(abs(n))\n    first_number = int(str(n)[0])\n    return math.factorial(first_number)\n\n\nvalue_1 = 7\nresult = value_1\n\nresult = fibonacci_binet(result if int(abs(result)) not in [0, 1] else value_1)\nprint('fibonacci_binet result:', result)\nresult = factorial(result if int(abs(result)) not in [0, 1] else value_1)\nprint('factorial result:', result)\n",
+        "Local run output": "fibonacci_binet result: 13\nfactorial result: 1",
+        "Chat GPT 3.5-turbo output": "fibonacci_binet result: 8\nfactorial result: 40320",
+        "Llama 3.1-70B Ins output": "fibonacci_binet result: 5\nfactorial result: 120",
+        "Liczba funkcji ": 2,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-11T20:27:13.008158",
+        "Program code": "import math\n\n\ndef euler_totient(n):\n    n = 2 + int(str(abs(n))[0])\n    count = 0\n    for k in range(1, n + 1):\n        if math.gcd(n, k) == 1:\n            count += 1\n    return count\n\n\ndef sine(angle):\n    return math.sin(math.radians(angle))\n\n\nvalue_1 = 5\nresult = value_1\n\nresult = euler_totient(result if int(abs(result)) not in [0, 1] else value_1)\nprint('euler_totient result:', result)\nresult = sine(result if int(abs(result)) not in [0, 1] else value_1)\nprint('sine result:', result)\n",
+        "Local run output": "euler_totient result: 6\nsine result: 0.10452846326765347",
+        "Chat GPT 3.5-turbo output": "euler_totient result: 5\nsine result: -0.9589242746631385",
+        "Llama 3.1-70B Ins output": "euler_totient result: 6\nsine result: 0.7205855102619214",
+        "Liczba funkcji ": 2,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
     }
 ]

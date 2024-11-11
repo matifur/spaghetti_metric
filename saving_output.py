@@ -21,22 +21,27 @@ def save_to_json(data, filename="measurements.json"):
         json.dump(file_data, f, indent=4)
 
 
-def compile_and_save_to_json(filename='generated_program.py', output_filename="measurements.json"):
+def compile_and_save_to_json(functions_numebr_castj, filename='generated_program.py', output_filename="measurements.json"):
     try:
         # Wczytanie kodu źródłowego
         with open(filename, 'r') as file:
             source_code = file.read()
 
-        # Uruchomienie programu i pobranie wyniku
+        # Uruchomienie programu i pobranie wyników z kompilatora i LLM
         result = subprocess.run(['python', filename], capture_output=True, text=True)
+        result_chat_gpt_3_5_Turbo = gpt_3_5_code_interpretation()
+        result_llama_3_1_70B_Ins = llama_3_1_70B_Ins_code_interpretation()
 
         # Przygotowanie danych do zapisu
         data = {
             "Date and Time": datetime.now().isoformat(),  # Data i czas wykonania
             "Program code": source_code,  # Kod programu
             "Local run output": result.stdout.strip() if result.returncode == 0 else result.stderr.strip(),  # Lokalne uruchomienie
-            "Chat GPT 3.5-turbo output": gpt_3_5_code_interpretation(),  # Wynik z LLM
-            "Llama 3.1-70B Ins output": llama_3_1_70B_Ins_code_interpretation(),  # Wynik z LLM
+            "Chat GPT 3.5-turbo output": result_chat_gpt_3_5_Turbo,  # Wynik z LLM
+            "Llama 3.1-70B Ins output": result_llama_3_1_70B_Ins,  # Wynik z LLM
+            "Liczba funkcji ": functions_numebr_castj,
+            "Chat GPT 3.5-Turbo correctness": True if result.stdout.strip() == result_chat_gpt_3_5_Turbo else False,
+            "Llama 3.1-70B Ins correctness": True if result.stdout.strip() == result_llama_3_1_70B_Ins else False
         }
 
         # Zapisz dane do pliku JSON

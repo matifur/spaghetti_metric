@@ -40,7 +40,7 @@ program_functions_math = [
 """,
 
 """def power(base, exponent):
-    base, exponent = int(string(abs(base))[0]), int(string(abs(exponent))[0])
+    base, exponent = int(str(abs(base))[0]), int(str(abs(exponent))[0])
     first_number = int(str(base)[0])
     return base ** exponent\n\n
 """,
