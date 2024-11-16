@@ -48,5 +48,55 @@
         "Liczba funkcji ": 2,
         "Chat GPT 3.5-Turbo correctness": false,
         "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-16T13:32:04.832130",
+        "Program code": "import math\n\n\ndef taylor_expansion_exp(x, n):\n    n, x = max(1, int(abs(n))), int(str(abs(x))[0])\n    return sum((x**i) / math.factorial(i) for i in range(n + 1))\n\n\nvalue_1 = 3\nvalue_2 = 9\n\nresult = value_1\n\nresult = taylor_expansion_exp(result if int(abs(result)) not in [0, 1] else value_1, value_2)\nprint('taylor_expansion_exp result:', result)\n",
+        "Local run output": "taylor_expansion_exp result: 20.06339285714286",
+        "Chat GPT 3.5-turbo output": "taylor_expansion_exp result: 41040.0",
+        "Llama 3.1-70B Ins output": "taylor_expansion_exp result: 161051",
+        "Liczba funkcji ": 1,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-16T13:32:06.849253",
+        "Program code": "import math\n\n\ndef euler_totient(n):\n    n = 2 + int(str(abs(n))[0])\n    count = 0\n    for k in range(1, n + 1):\n        if math.gcd(n, k) == 1:\n            count += 1\n    return count\n\n\nvalue_1 = 2\nresult = value_1\n\nresult = euler_totient(result if int(abs(result)) not in [0, 1] else value_1)\nprint('euler_totient result:', result)\n",
+        "Local run output": "euler_totient result: 2",
+        "Chat GPT 3.5-turbo output": "euler_totient result: 2",
+        "Llama 3.1-70B Ins output": "euler_totient result: 2",
+        "Liczba funkcji ": 1,
+        "Chat GPT 3.5-Turbo correctness": true,
+        "Llama 3.1-70B Ins correctness": true
+    },
+    {
+        "Date and Time": "2024-11-16T13:32:08.579695",
+        "Program code": "import math\n\n\ndef factorial(n):\n    n = int(abs(n))\n    first_number = int(str(n)[0])\n    return math.factorial(first_number)\n\n\nvalue_1 = 4\nresult = value_1\n\nresult = factorial(result if int(abs(result)) not in [0, 1] else value_1)\nprint('factorial result:', result)\n",
+        "Local run output": "factorial result: 24",
+        "Chat GPT 3.5-turbo output": "factorial result: 24",
+        "Llama 3.1-70B Ins output": "factorial result: 6",
+        "Liczba funkcji ": 1,
+        "Chat GPT 3.5-Turbo correctness": true,
+        "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-16T13:32:10.363928",
+        "Program code": "import math\n\n\ndef euler_polynomial(n, x):\n    n, x = int(str(abs(n))[0]), int(str(abs(x))[0])\n    if n > x:\n        x = n\n        x1 = n\n        n = x1\n    E = [1] * (n + 1)\n    for k in range(1, n + 1):\n        E[k] = E[k - 1] * (x - (k - 1))\n    return E[-1]\n\n\nvalue_1 = 4\nvalue_2 = 9\n\nresult = value_1\n\nresult = euler_polynomial(result if int(abs(result)) not in [0, 1] else value_1, value_2)\nprint('euler_polynomial result:', result)\n",
+        "Local run output": "euler_polynomial result: 3024",
+        "Chat GPT 3.5-turbo output": "euler_polynomial result: 840",
+        "Llama 3.1-70B Ins output": "euler_polynomial result: 40320",
+        "Liczba funkcji ": 1,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
+    },
+    {
+        "Date and Time": "2024-11-16T13:32:12.325720",
+        "Program code": "import math\n\n\ndef partial_harmonic_sum(n):\n    n = max(1, int(abs(n)))\n    return sum(1 / k for k in range(1, n + 1))\n\n\nvalue_1 = 8\nresult = value_1\n\nresult = partial_harmonic_sum(result if int(abs(result)) not in [0, 1] else value_1)\nprint('partial_harmonic_sum result:', result)\n",
+        "Local run output": "partial_harmonic_sum result: 2.717857142857143",
+        "Chat GPT 3.5-turbo output": "partial_harmonic_sum result: 2.828968253968254",
+        "Llama 3.1-70B Ins output": "partial_harmonic_sum result: 2.717391304347826",
+        "Liczba funkcji ": 1,
+        "Chat GPT 3.5-Turbo correctness": false,
+        "Llama 3.1-70B Ins correctness": false
     }
 ]
