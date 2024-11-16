@@ -3,6 +3,7 @@ from datetime import datetime
 import subprocess
 from model_GPT_3_5_turbo import gpt_3_5_code_interpretation
 from model_Llama_3_1_70B_Ins import llama_3_1_70B_Ins_code_interpretation
+from model_GPT_4o import gpt_4o_code_interpretation
 
 
 def save_to_json(data, filename="measurements.json"):
@@ -31,6 +32,7 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
         result = subprocess.run(['python', filename], capture_output=True, text=True)
         result_chat_gpt_3_5_Turbo = gpt_3_5_code_interpretation()
         result_llama_3_1_70B_Ins = llama_3_1_70B_Ins_code_interpretation()
+        result_chat_gpt_4o = gpt_4o_code_interpretation()
 
         # Przygotowanie danych do zapisu
         data = {
@@ -39,9 +41,12 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
             "Local run output": result.stdout.strip() if result.returncode == 0 else result.stderr.strip(),  # Lokalne uruchomienie
             "Chat GPT 3.5-turbo output": result_chat_gpt_3_5_Turbo,  # Wynik z LLM
             "Llama 3.1-70B Ins output": result_llama_3_1_70B_Ins,  # Wynik z LLM
+            "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
             "Liczba funkcji ": functions_numebr_castj,
             "Chat GPT 3.5-Turbo correctness": True if result.stdout.strip() == result_chat_gpt_3_5_Turbo else False,
-            "Llama 3.1-70B Ins correctness": True if result.stdout.strip() == result_llama_3_1_70B_Ins else False
+            "Llama 3.1-70B Ins correctness": True if result.stdout.strip() == result_llama_3_1_70B_Ins else False,
+            "Chat GPT 4o correctness": True if result.stdout.strip() == result_chat_gpt_4o else False
+
         }
 
         # Zapisz dane do pliku JSON
