@@ -6,11 +6,11 @@ import random
 # 3) istotna jest ilość tabulacji dlatego zawsze zaczynamy od samego początku lewej strony.
 program_functions_math = [
 """def square(number):
-    return number ** 2\n\n
+    return round_if_float(number ** 2)\n\n
 """,
 
 """def square_root(number):
-    return math.sqrt(number)\n\n
+    return round_if_float(math.sqrt(number))\n\n
 """,
 
 """def sum_numbers(a, b):
@@ -36,7 +36,7 @@ program_functions_math = [
 """,
 
 """def circle_area(radius):
-    return 3.14 * radius ** 2\n\n
+    return round_if_float(3.14 * radius ** 2)\n\n
 """,
 
 """def power(base, exponent):
@@ -46,7 +46,7 @@ program_functions_math = [
 """,
 
 """def sine(angle):
-    return math.sin(math.radians(angle))\n\n
+    return round_if_float(math.sin(math.radians(angle)))\n\n
 """,
 
 """def nth_fibonacci(n):
@@ -85,7 +85,7 @@ program_functions_math = [
         A[m] = 1 / (m + 1)
         for j in range(m, 0, -1):
             A[j - 1] = j * (A[j - 1] - A[j])
-    return A[0]\n\n
+    return round_if_float(A[0])\n\n
 """,
 
 """def euler_mascheroni(terms=100000):
@@ -93,7 +93,7 @@ program_functions_math = [
     gamma = 0.0
     for k in range(1, terms + 1):
         gamma += (1 / k) - math.log((k + 1) / k)
-    return gamma\n\n
+    return round_if_float(gamma)\n\n
 """,
 
 """def harmonic_number(n):
@@ -113,7 +113,7 @@ program_functions_math = [
 """def riemann_zeta(n, terms=100000):
     n = abs(n) if n > 1 else 2
     terms = max(1, int(abs(terms)))
-    return sum(1 / k**n for k in range(1, terms + 1))\n\n
+    return round_if_float(sum(1 / k**n for k in range(1, terms + 1)))\n\n
 """,
 
 """def pi_leibniz(terms=1000000):
@@ -121,7 +121,7 @@ program_functions_math = [
     pi_approx = 0.0
     for k in range(terms):
         pi_approx += ((-1)**k) / (2 * k + 1)
-    return 4 * pi_approx\n\n
+    return round_if_float(4 * pi_approx)\n\n
 """,
 
 """def stirling_first_kind(n, k):
@@ -144,17 +144,17 @@ program_functions_math = [
         A[m] = 1 / (m + 1)
         for j in range(m, 0, -1):
             A[j - 1] = j * (A[j - 1] - A[j])
-    return A[0] * (1 if n % 2 == 0 else -1)\n\n
+    return round_if_float(A[0] * (1 if n % 2 == 0 else -1))\n\n
 """,
 
 """def ln2_taylor(terms=1000):
     terms = max(1, int(abs(terms)))
-    return sum((-1)**(n + 1) / n for n in range(1, terms + 1))\n\n
+    return round_if_float(sum((-1)**(n + 1) / n for n in range(1, terms + 1)))\n\n
 """,
 
 """def e_approximation(terms=20):
     terms = max(1, int(abs(terms)))
-    return sum(1 / math.factorial(n) for n in range(terms))\n\n
+    return round_if_float(sum(1 / math.factorial(n) for n in range(terms)))\n\n
 """,
 
 """def binomial_coefficient(n, k):
@@ -187,17 +187,17 @@ program_functions_math = [
     for k in range(1, terms + 1):
         term = 4 / (2 * k * (2 * k + 1) * (2 * k + 2))
         pi_approx += term if k % 2 == 1 else -term  # Naprzemienne dodawanie/odejmowanie
-    return pi_approx 
+    return round_if_float(pi_approx) 
 """,
 
 """def partial_harmonic_sum(n):
     n = max(1, int(abs(n)))
-    return sum(1 / k for k in range(1, n + 1))\n\n
+    return round_if_float(sum(1 / k for k in range(1, n + 1)))\n\n
 """,
 
 """def taylor_expansion_exp(x, n):
     n, x = max(1, int(abs(n))), int(str(abs(x))[0])
-    return sum((x**i) / math.factorial(i) for i in range(n + 1))\n\n
+    return round_if_float(sum((x**i) / math.factorial(i) for i in range(n + 1)))\n\n
 """,
 
 """def euler_totient(n):
@@ -234,7 +234,11 @@ def generate_math_1(variable_value_1, variable_value_2, select_functions):
     svr = second_variable_needed(select_functions)
 
     # Część kodu która zawsze będzie znajdowała się na początku programu
-    always_include = """import math\n\n\n"""
+    always_include = """import math\n\n
+def round_if_float(value):
+    if isinstance(value, float):
+        return round(value, 3)
+    return value\n\n\n"""
 
     # Część główna programu: ustawiamy początkowy wynik na wartość zmiennej value_1
     main_content = f"value_1 = {variable_value_1}\n"
