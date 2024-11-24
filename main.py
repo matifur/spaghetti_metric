@@ -4,7 +4,7 @@ import random
 
 
 # Wywołujemy funkcję z wartością zmiennych oraz funkcjami które chcemy zawrzeć
-def run_generator(num_of_functions, num_of_generations):
+def run_generator_1_functions_randomizer(num_of_functions, num_of_generations):
     for j in range(num_of_generations):
         variable_1_rand = random.randrange(1, 10, 1)
         variable_2_rand = random.randrange(1, 10, 1)
@@ -36,4 +36,4 @@ while True:
         print("To nie jest liczba. Spróbuj ponownie.")
 
 
-run_generator(liczba_funkcji, liczba_generacji)
+run_generator_1_functions_randomizer(liczba_funkcji, liczba_generacji)

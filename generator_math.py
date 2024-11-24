@@ -258,8 +258,8 @@ def round_if_float(value):
         else:
             main_content += f"result = {func_name}(result if int(abs(result)) not in [0, 1] else value_1)\n"
 
-        # Wyświetlanie wyniku po każdym wywołaniu funkcji
-        main_content += f"print('{func_name} result:', result)\n"
+    # Wyświetlanie wyniku po każdym wywołaniu funkcji
+    main_content += f"print(result)\n"
 
     # Łączymy program w całość
     program_code = always_include
