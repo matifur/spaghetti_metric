@@ -5,6 +5,33 @@ from model_GPT_3_5_turbo import gpt_3_5_code_interpretation
 from model_Llama_3_1_70B_Ins import llama_3_1_70B_Ins_code_interpretation
 from model_GPT_4o import gpt_4o_code_interpretation
 
+#Funkcja porównójąca wyniki działania modeli i kompilatora
+def compare_values(value1, value2, tolerance=1e-3):
+    # Funkcja pomocnicza do usuwania białych znaków i konwersji na odpowiedni typ
+    def clean_and_convert(value):
+        if isinstance(value, str):
+            value = value.strip()  # Usuwa białe znaki z początku i końca
+            try:
+                return float(value)  # Próbuj zamienić na float
+            except ValueError:
+                pass  # Jeśli nie da się zamienić, pozostaw jako string
+        return value
+
+    # Czyszczenie i konwersja
+    value1 = clean_and_convert(value1)
+    value2 = clean_and_convert(value2)
+
+    # Porównanie, jeśli obie wartości to bool
+    if isinstance(value1, bool) and isinstance(value2, bool):
+        return value1 == value2
+
+    # Porównanie, jeśli obie wartości to liczby
+    if isinstance(value1, (int, float)) and isinstance(value2, (int, float)):
+        return abs(value1 - value2) <= tolerance
+
+    # Porównanie bezpośrednie dla innych typów (np. string)
+    return value1 == value2
+
 
 def save_to_json(data, filename="measurements.json"):
     # Wczytanie istniejących danych (jeśli plik istnieje)
@@ -43,9 +70,9 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
             "Llama 3.1-70B Ins output": result_llama_3_1_70B_Ins,  # Wynik z LLM
             "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
             "Liczba funkcji ": functions_numebr_castj,
-            "Chat GPT 3.5-Turbo correctness": True if result.stdout.strip() == result_chat_gpt_3_5_Turbo else False,
-            "Llama 3.1-70B Ins correctness": True if result.stdout.strip() == result_llama_3_1_70B_Ins else False,
-            "Chat GPT 4o correctness": True if result.stdout.strip() == result_chat_gpt_4o else False
+            "Chat GPT 3.5-Turbo correctness": compare_values(result.stdout.strip(), result_chat_gpt_3_5_Turbo),
+            "Llama 3.1-70B Ins correctness": compare_values(result.stdout.strip(), result_llama_3_1_70B_Ins),
+            "Chat GPT 4o correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o)
 
         }
 
