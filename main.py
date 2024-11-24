@@ -25,15 +25,27 @@ def run_generator_1_functions_randomizer(num_of_functions, num_of_generations):
         print("Process Completed!")
         print("==============================================================================")
 
+
 # Main
 # User input
+print("1) Test wpływu długości programu na pracę LLM")
 while True:
     try:
-        liczba_funkcji = int(input("Podaj liczbę funkcji: "))
-        liczba_generacji = int(input("Podaj liczbe generacji: "))
+        choose_test = int(input("Podaj numer testu z listy który chciałbyś uruchomić: "))
         break
     except ValueError:
-        print("To nie jest liczba. Spróbuj ponownie.")
+        print("To nie jest numer. Spróbuj ponownie.")
 
 
-run_generator_1_functions_randomizer(liczba_funkcji, liczba_generacji)
+match choose_test:
+    case 1:
+        while True:
+            try:
+                liczba_funkcji = int(input("Podaj liczbę funkcji: "))
+                liczba_generacji = int(input("Podaj liczbe generacji: "))
+                break
+            except ValueError:
+                print("To nie jest liczba. Spróbuj ponownie.")
+        run_generator_1_functions_randomizer(liczba_funkcji, liczba_generacji)
+    case _:
+        print("Niepoprawna opcja")
