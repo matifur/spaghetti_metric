@@ -18,7 +18,7 @@ def llama_3_1_70B_Ins_code_interpretation():
         return
 
     prompt = """Tell me what will be terminal output of this program? Print only terminal output, no commentary. 
-Make sure that what you tell me is exactly what will be printed in terminal including text not only number.
+Make sure that what you tell me is exactly what will be printed in terminal.
 Try to be as precise in your calculations as possible.\n\n"""
     prompt += program_code
 
@@ -43,4 +43,4 @@ Try to be as precise in your calculations as possible.\n\n"""
     return output
 
 #Przykładowe wywołanie funkcji
-#print(llama_3_1_70B_Ins_code_interpretation())
+print(llama_3_1_70B_Ins_code_interpretation())

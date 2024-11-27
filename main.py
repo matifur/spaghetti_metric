@@ -26,6 +26,29 @@ def run_generator_1_functions_randomizer(num_of_functions, num_of_generations):
         print("==============================================================================")
 
 
+def run_generator_2_every_function_benchmark(num_of_function, num_of_generations):
+    for j in range(num_of_generations):
+        variable_1_rand = random.randrange(1, 10, 1)
+        variable_2_rand = random.randrange(1, 10, 1)
+        select_function_rand = []
+        #Tutaj wybieramy nie wszystkie funkcje bo wpływ skomplikowanych obliczeń matematycznych jest zbyt duży
+        for i in range(num_of_functions):
+            select_function_rand.append(random.randrange(1, len(program_functions_math), 1))
+        print(len(program_functions_math))
+
+        # Wykaz podanych wartości
+        print(f"variable_1_rand = {variable_1_rand}, variable_2_rand = {variable_2_rand}, select_function_rand = {select_function_rand}")
+        generate_math_1(variable_1_rand, variable_2_rand, select_function_rand)  # functions randomizer, optional variable
+
+        print("==============================================================================")
+        print("Running program and collecting output from LLM-s")
+        print("==============================================================================")
+        compile_and_save_to_json(num_of_functions)
+        print("==============================================================================")
+        print("Process Completed!")
+        print("==============================================================================")
+
+
 # Main
 # User input
 print("1) Test wpływu długości programu na pracę LLM")
