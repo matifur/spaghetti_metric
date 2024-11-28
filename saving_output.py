@@ -5,6 +5,16 @@ from model_GPT_3_5_turbo import gpt_3_5_code_interpretation
 from model_Llama_3_1_70B_Ins import llama_3_1_70B_Ins_code_interpretation
 from model_GPT_4o import gpt_4o_code_interpretation
 from model_GPT_4o_mini import gpt_4o_mini_code_interpretation
+from generator_math import program_functions_math
+
+def cut_function_name_test_2(a, output_filename):
+    if output_filename == "measurements_2.json":
+        lines = program_functions_math[a].splitlines()
+        first_line = lines[0].replace(" ", "")
+        return first_line[3:first_line.find("(")] if first_line.find("(") != -1 else print('ERROR! No "(" in first line!')
+    else:
+        return "null"
+
 
 #Funkcja porównójąca wyniki działania modeli i kompilatora
 def compare_values(value1, value2, tolerance=1e-3):
@@ -50,7 +60,7 @@ def save_to_json(data, filename="measurements.json"):
         json.dump(file_data, f, indent=4)
 
 
-def compile_and_save_to_json(functions_numebr_castj, filename='generated_program.py', output_filename="measurements.json"):
+def compile_and_save_to_json(functions_numebr_castj, filename='generated_program.py', output_filename="measurements.json", func_index_castj = 1):
     try:
         # Wczytanie kodu źródłowego
         with open(filename, 'r') as file:
@@ -73,6 +83,7 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
             "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
             "Chat GPT 4o mini output": result_chat_gpt_4o_mini,  # Wynik z LLM
             "Liczba funkcji ": functions_numebr_castj,
+            "Nazwa funkcji ": cut_function_name_test_2(func_index_castj, output_filename),
             "Chat GPT 3.5-Turbo correctness": compare_values(result.stdout.strip(), result_chat_gpt_3_5_Turbo),
             "Llama 3.1-70B Ins correctness": compare_values(result.stdout.strip(), result_llama_3_1_70B_Ins),
             "Chat GPT 4o correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o),
