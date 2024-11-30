@@ -7,17 +7,16 @@ def round_if_float(value):
     return value
 
 
-def euler_totient(n):
-    n = 2 + int(str(abs(n))[0])
-    count = 0
-    for k in range(1, n + 1):
-        if math.gcd(n, k) == 1:
-            count += 1
-    return count
+def is_prime(number):
+    number = int(abs(number))
+    for i in range(2, int(math.sqrt(number)) + 1):
+        if number % i == 0:
+            return False
+    return True
 
 
-value_1 = 6
+value_1 = 5
 result = value_1
 
-result = euler_totient(result if int(abs(result)) not in [0, 1] else value_1)
+result = is_prime(result if int(abs(result)) not in [0, 1] else value_1)
 print(result)

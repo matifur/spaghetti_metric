@@ -5,6 +5,7 @@ from model_GPT_3_5_turbo import gpt_3_5_code_interpretation
 from model_Llama_3_1_70B_Ins import llama_3_1_70B_Ins_code_interpretation
 from model_GPT_4o import gpt_4o_code_interpretation
 from model_GPT_4o_mini import gpt_4o_mini_code_interpretation
+from model_llama_3_1_8B import llama_3_1_8B_code_interpretation
 from generator_math import program_functions_math
 
 def cut_function_name_test_2(a, output_filename):
@@ -70,6 +71,7 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
         result = subprocess.run(['python', filename], capture_output=True, text=True)
         result_chat_gpt_3_5_Turbo = gpt_3_5_code_interpretation()
         result_llama_3_1_70B_Ins = llama_3_1_70B_Ins_code_interpretation()
+        result_llama_3_1_8B = llama_3_1_8B_code_interpretation()
         result_chat_gpt_4o = gpt_4o_code_interpretation()
         result_chat_gpt_4o_mini = gpt_4o_mini_code_interpretation()
 
@@ -80,12 +82,14 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
             "Local run output": result.stdout.strip() if result.returncode == 0 else result.stderr.strip(),  # Lokalne uruchomienie
             "Chat GPT 3.5-turbo output": result_chat_gpt_3_5_Turbo,  # Wynik z LLM
             "Llama 3.1-70B Ins output": result_llama_3_1_70B_Ins,  # Wynik z LLM
+            "Llama 3.1-8B output": result_llama_3_1_8B,  # Wynik z LLM
             "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
             "Chat GPT 4o mini output": result_chat_gpt_4o_mini,  # Wynik z LLM
             "Liczba funkcji ": functions_numebr_castj,
             "Nazwa funkcji ": cut_function_name_test_2(func_index_castj, output_filename),
             "Chat GPT 3.5-Turbo correctness": compare_values(result.stdout.strip(), result_chat_gpt_3_5_Turbo),
             "Llama 3.1-70B Ins correctness": compare_values(result.stdout.strip(), result_llama_3_1_70B_Ins),
+            "Llama 3.1-8B correctness": compare_values(result.stdout.strip(), result_llama_3_1_8B),
             "Chat GPT 4o correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o),
             "Chat GPT 4o mini correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o_mini)
 
