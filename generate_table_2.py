@@ -29,8 +29,10 @@ def process_data_to_table(data):
         models = {
             "Chat GPT 3.5-Turbo": entry["Chat GPT 3.5-Turbo correctness"],
             "Llama 3.1-70B Ins": entry["Llama 3.1-70B Ins correctness"],
+            "Llama 3.1-8B": entry["Llama 3.1-8B correctness"],
             "Chat GPT 4o": entry["Chat GPT 4o correctness"],
-            "Chat GPT 4o mini": entry["Chat GPT 4o mini correctness"],
+            "Chat GPT 4o mini": entry["Chat GPT 4o mini correctness"]
+
         }
 
         if function_name not in results:
@@ -47,7 +49,7 @@ def process_data_to_table(data):
         table_data[function_name] = []
 
     # Obliczanie procentowej poprawności dla każdej funkcji i modelu
-    for model in ["Chat GPT 3.5-Turbo", "Llama 3.1-70B Ins", "Chat GPT 4o", "Chat GPT 4o mini"]:
+    for model in ["Chat GPT 3.5-Turbo", "Llama 3.1-70B Ins", "Llama 3.1-8B", "Chat GPT 4o", "Chat GPT 4o mini"]:
         table_data["Nazwa Modelu"].append(model)
         for function_name, stats in results.items():
             correct = stats[model]["correct"]

@@ -61,7 +61,7 @@ def save_to_json(data, filename="measurements.json"):
         json.dump(file_data, f, indent=4)
 
 
-def compile_and_save_to_json(functions_numebr_castj, filename='generated_program.py', output_filename="measurements.json", func_index_castj = 1):
+def compile_and_save_to_json(functions_numebr_castj, filename='generated_program.py', output_filename="measurements.json", func_index_castj = 1, test_index = 1):
     try:
         # Wczytanie kodu źródłowego
         with open(filename, 'r') as file:
@@ -86,6 +86,7 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
             "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
             "Chat GPT 4o mini output": result_chat_gpt_4o_mini,  # Wynik z LLM
             "Liczba funkcji ": functions_numebr_castj,
+            "Numer testu": test_index,
             "Nazwa funkcji ": cut_function_name_test_2(func_index_castj, output_filename),
             "Chat GPT 3.5-Turbo correctness": compare_values(result.stdout.strip(), result_chat_gpt_3_5_Turbo),
             "Llama 3.1-70B Ins correctness": compare_values(result.stdout.strip(), result_llama_3_1_70B_Ins),
@@ -100,7 +101,7 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
         print(f"Wynik zapisano do pliku {output_filename}")
 
     except Exception as e:
-        print(f"Wystąpił błąd: {e}")
+        print(f"Wystąpił błąd(tutaj): {e}")
 
 
 # Przykładowe wywołanie funkcji

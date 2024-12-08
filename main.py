@@ -49,10 +49,42 @@ def run_generator_2_every_function_benchmark(num_of_generations):
             print("==============================================================================")
 
 
+def run_generator_3_every_function_breaktest(num_of_functions, num_of_generations, test_index):
+
+    for j in range(num_of_generations):
+
+        print("==============================================================================")
+        print("Running program and collecting output from LLM-s")
+        print("==============================================================================")
+        compile_and_save_to_json(num_of_functions, 'generated_program.py', "measurements_3.json", 1, test_index)
+        print("==============================================================================")
+        print("Process Completed!")
+        print("==============================================================================")
+
+
+def generate_program_for_3_test(num_of_functions):
+    variable_1_rand = random.randrange(1, 10, 1)
+    variable_2_rand = random.randrange(1, 10, 1)
+    select_function_rand = []
+    # Tutaj wybieramy nie wszystkie funkcje bo wpływ skomplikowanych obliczeń matematycznych jest zbyt duży
+    for i in range(num_of_functions):
+        select_function_rand.append(random.randrange(1, 10, 1))
+
+    print(len(program_functions_math))
+
+    # Wykaz podanych wartości
+    print(
+        f"variable_1_rand = {variable_1_rand}, variable_2_rand = {variable_2_rand}, select_function_rand = {select_function_rand}")
+    generate_math_1(variable_1_rand, variable_2_rand, select_function_rand)  # functions randomizer, optional variable
+
+
+
 # Main
 # User input
 print("1) Test wpływu długości programu na pracę LLM")
 print("2) Test zdolności do ewaluacji każdej funkcji")
+print("3) Testowanie tego samego programu")
+print("4) Generuj program dla 3 testu")
 while True:
     try:
         choose_test = int(input("Podaj numer testu z listy który chciałbyś uruchomić: "))
@@ -79,5 +111,23 @@ match choose_test:
             except ValueError:
                 print("To nie jest liczba. Spróbuj ponownie.")
         run_generator_2_every_function_benchmark(liczba_generacji)
+    case 3:
+        while True:
+            try:
+                liczba_funkcji = int(input("Podaj liczbę funkcji: "))
+                liczba_generacji = int(input("Podaj liczbe generacji: "))
+                numer_testu = int(input("Podaj numer testu: "))
+                break
+            except ValueError:
+                print("To nie jest liczba. Spróbuj ponownie.")
+        run_generator_3_every_function_breaktest(liczba_funkcji, liczba_generacji, numer_testu)
+    case 4:
+        while True:
+            try:
+                liczba_funkcji = int(input("Podaj liczbę funkcji: "))
+                break
+            except ValueError:
+                print("To nie jest liczba. Spróbuj ponownie.")
+        generate_program_for_3_test(liczba_funkcji)
     case _:
         print("Niepoprawna opcja")

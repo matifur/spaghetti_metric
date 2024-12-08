@@ -7,16 +7,23 @@ def round_if_float(value):
     return value
 
 
-def is_prime(number):
-    number = int(abs(number))
-    for i in range(2, int(math.sqrt(number)) + 1):
-        if number % i == 0:
-            return False
-    return True
+def power(base, exponent):
+    base, exponent = int(str(abs(base))[0]), int(str(abs(exponent))[0])
+    first_number = int(str(base)[0])
+    return base ** exponent
 
 
-value_1 = 5
+def factorial(n):
+    n = int(abs(n))
+    first_number = int(str(n)[0])
+    return math.factorial(first_number)
+
+
+value_1 = 2
+value_2 = 1
+
 result = value_1
 
-result = is_prime(result if int(abs(result)) not in [0, 1] else value_1)
+result = power(result if int(abs(result)) not in [0, 1] else value_1, value_2)
+result = factorial(result if int(abs(result)) not in [0, 1] else value_1)
 print(result)

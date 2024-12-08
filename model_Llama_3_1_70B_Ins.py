@@ -17,9 +17,10 @@ def llama_3_1_70B_Ins_code_interpretation():
         print("Plik generated_program.py nie został znaleziony.")
         return
 
-    prompt = """Tell me what will be terminal output of this program? Print only terminal output, no commentary. 
-Make sure that what you tell me is exactly what will be printed in terminal.
-Try to be as precise in your calculations as possible.\n\n"""
+    #prompt = """Tell me what will be terminal output of this program? Print only terminal output it should be a number, no commentary.
+#Make sure that what you tell me is exactly what will be printed in terminal.
+#Try to be as precise in your calculations as possible.\n\n"""
+    prompt = " Please tell me what will be printed in my terminal by this program. Do not write comentary? \n\n"
     prompt += program_code
 
     messages = [
