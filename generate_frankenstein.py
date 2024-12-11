@@ -1,62 +1,62 @@
 import random
 
-def generate_frankenstein_program(queue_count=3, function_count=3, max_iterations=5, operations=None):
-    if operations is None:
-        operations = ["+", "-", "*", "//"]
-
+def generate_frankenstein_program(queue_count=3, function_count=3):
     # Nagłówek programu
-    header = """# Wygenerowany kod\n\nimport random\n\n"""
+    header = """def addition(a, b):
+    return a + b
 
-    # Funkcja pomocnicza
-    helper_function = """def safe_division(a, b):
-    return a // b if b != 0 else 0\n\n"""
+def subtraction(a, b):
+    return a - b
+
+def multiplication(a, b):
+    return a * b
+
+def safe_division(a, b):
+    return a // b if b != 0 else 0\n\n
+"""
 
     # Losowe kolejki generowane podczas tworzenia programu
-    exaples = {}
+    examples = {}
     for i in range(queue_count):
-        exaples[f"example_{i}"] = [random.randint(1, 100) for _ in range(random.randint(5, 10))]
+        examples[f"example_{i}"] = [random.randint(1, 100) for _ in range(random.randint(5, 10))]
+
+    # Ustalanie losowego przykładu i indeksu przed generowaniem programu
+    random_example_idx = random.randint(0, queue_count - 1)
+    random_element_idx = random.randint(0, len(examples[f"example_{random_example_idx}"]) - 1)
 
     # Konwersja kolejek do kodu
     examples_section = ""
-    for example_name, example_data in exaples.items():
+    for example_name, example_data in examples.items():
         examples_section += f"{example_name} = {example_data}\n"
 
     examples_section += "\n"
 
-    # Generowanie funkcji z pętlami for
-    functions_section = ""
+    # Generowanie jednej funkcji zawierającej wiele pętli for
+    operations = ["addition", "subtraction", "multiplication", "safe_division"]
+    main_function = "def process_examples(input_example):\n"
+    main_function += "    output_example = input_example\n"
+
     for i in range(function_count):
-        func_name = f"function_{i}"
-        queue_in = f"example_{random.randint(0, queue_count - 1)}"
-        queue_out = f"example_{random.randint(0, queue_count - 1)}"
         operation = random.choice(operations)
+        main_function += f"    for idx, value in enumerate(output_example):\n"
+        main_function += f"        output_example[idx] = {operation}(value, {random.randint(1, 10)})\n"
 
-        functions_section += f"def {func_name}(input_example):\n"
-        functions_section += f"    output_example = []\n"
-        functions_section += f"    for value in input_example:\n"
+    main_function += "    return output_example\n\n"
 
-        if operation == "//":
-            functions_section += f"        result = safe_division(value, {random.randint(1, 10)})\n"
-        else:
-            functions_section += f"        result = value {operation} {random.randint(1, 10)}\n"
+    # Generowanie losowego przypisania kolejek
+    example_assignments = list(range(queue_count))
+    random.shuffle(example_assignments)
 
-        functions_section += f"        output_example.append(result)\n"
-        functions_section += f"    return output_example\n\n"
-
-    # Generowanie głównego kodu
     main_section = "if __name__ == '__main__':\n"
-    for i in range(queue_count):
-        example_name = f"example_{i}"
-        function_to_apply = f"function_{random.randint(0, function_count - 1)}"
-        main_section += f"    {example_name} = {function_to_apply}({example_name})\n"
+    for i, target in enumerate(example_assignments):
+        main_section += f"    example_{i} = process_examples(example_{target})\n"
 
-    main_section += "\n    # Wyświetlenie wyników\n"
-    for i in range(queue_count):
-        example_name = f"example_{i}"
-        main_section += f"    print('{example_name}:', {example_name})\n"
+    # Wyświetlenie ustalonego wyniku
+    main_section += "\n    # Wyświetlenie losowego wyniku\n"
+    main_section += f"    print(example_{random_example_idx}[{random_element_idx}])\n"
 
     # Łączenie całości kodu
-    program_code = header + helper_function + examples_section + functions_section + main_section
+    program_code = header + examples_section + main_function + main_section
 
     # Zapis do pliku z poprawionym kodowaniem
     try:
@@ -66,6 +66,5 @@ def generate_frankenstein_program(queue_count=3, function_count=3, max_iteration
     except IOError as e:
         print(f"Wystąpił błąd podczas zapisywania do pliku: {e}")
 
-
 # Przykładowe użycie funkcji
-generate_frankenstein_program(queue_count=5, function_count=4, max_iterations=7)
+generate_frankenstein_program(queue_count=1, function_count=1)

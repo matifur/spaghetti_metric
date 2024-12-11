@@ -104,5 +104,49 @@ def compile_and_save_to_json(functions_numebr_castj, filename='generated_program
         print(f"Wystąpił błąd(tutaj): {e}")
 
 
+
+def compile_and_save_frankenstein(number_of_data, number_of_operations, filename='frankenstein_program.py', output_filename="measurements_frankenstein.json"):
+    try:
+        # Wczytanie kodu źródłowego
+        with open(filename, 'r') as file:
+            source_code = file.read()
+
+        # Uruchomienie programu i pobranie wyników z kompilatora i LLM
+        result = subprocess.run(['python', filename], capture_output=True, text=True)
+        result_chat_gpt_3_5_Turbo = gpt_3_5_code_interpretation()
+        result_llama_3_1_70B_Ins = llama_3_1_70B_Ins_code_interpretation()
+        result_llama_3_1_8B = llama_3_1_8B_code_interpretation()
+        result_chat_gpt_4o = gpt_4o_code_interpretation()
+        result_chat_gpt_4o_mini = gpt_4o_mini_code_interpretation()
+
+        # Przygotowanie danych do zapisu
+        data = {
+            "Date and Time": datetime.now().isoformat(),  # Data i czas wykonania
+            "Program code": source_code,  # Kod programu
+            "Local run output": result.stdout.strip() if result.returncode == 0 else result.stderr.strip(),  # Lokalne uruchomienie
+            "Chat GPT 3.5-turbo output": result_chat_gpt_3_5_Turbo,  # Wynik z LLM
+            "Llama 3.1-70B Ins output": result_llama_3_1_70B_Ins,  # Wynik z LLM
+            "Llama 3.1-8B output": result_llama_3_1_8B,  # Wynik z LLM
+            "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
+            "Chat GPT 4o mini output": result_chat_gpt_4o_mini,  # Wynik z LLM
+            "Liczba operacji": number_of_operations,
+            "Liczba danych": number_of_data,
+            "Chat GPT 3.5-Turbo correctness": compare_values(result.stdout.strip(), result_chat_gpt_3_5_Turbo),
+            "Llama 3.1-70B Ins correctness": compare_values(result.stdout.strip(), result_llama_3_1_70B_Ins),
+            "Llama 3.1-8B correctness": compare_values(result.stdout.strip(), result_llama_3_1_8B),
+            "Chat GPT 4o correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o),
+            "Chat GPT 4o mini correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o_mini)
+
+        }
+
+        # Zapisz dane do pliku JSON
+        save_to_json(data, output_filename)
+        print(f"Wynik zapisano do pliku {output_filename}")
+
+    except Exception as e:
+        print(f"Wystąpił błąd(tutaj): {e}")
+
+
+
 # Przykładowe wywołanie funkcji
 #compile_and_save_to_json()
