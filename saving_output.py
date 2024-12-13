@@ -7,6 +7,7 @@ from model_GPT_4o import gpt_4o_code_interpretation
 from model_GPT_4o_mini import gpt_4o_mini_code_interpretation
 from model_llama_3_1_8B import llama_3_1_8B_code_interpretation
 from generator_math import program_functions_math
+from model_GPT_4o_temperature import gpt_4o_code_interpretation_temp
 
 def cut_function_name_test_2(a, output_filename):
     if output_filename == "measurements_2.json":
@@ -113,11 +114,11 @@ def compile_and_save_frankenstein(number_of_data, number_of_operations, filename
 
         # Uruchomienie programu i pobranie wyników z kompilatora i LLM
         result = subprocess.run(['python', filename], capture_output=True, text=True)
-        result_chat_gpt_3_5_Turbo = gpt_3_5_code_interpretation()
-        result_llama_3_1_70B_Ins = llama_3_1_70B_Ins_code_interpretation()
-        result_llama_3_1_8B = llama_3_1_8B_code_interpretation()
-        result_chat_gpt_4o = gpt_4o_code_interpretation()
-        result_chat_gpt_4o_mini = gpt_4o_mini_code_interpretation()
+        result_chat_gpt_3_5_Turbo = gpt_3_5_code_interpretation(filename)
+        result_llama_3_1_70B_Ins = llama_3_1_70B_Ins_code_interpretation(filename)
+        result_llama_3_1_8B = llama_3_1_8B_code_interpretation(filename)
+        result_chat_gpt_4o = gpt_4o_code_interpretation(filename)
+        result_chat_gpt_4o_mini = gpt_4o_mini_code_interpretation(filename)
 
         # Przygotowanie danych do zapisu
         data = {
@@ -137,6 +138,35 @@ def compile_and_save_frankenstein(number_of_data, number_of_operations, filename
             "Chat GPT 4o correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o),
             "Chat GPT 4o mini correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o_mini)
 
+        }
+
+        # Zapisz dane do pliku JSON
+        save_to_json(data, output_filename)
+        print(f"Wynik zapisano do pliku {output_filename}")
+
+    except Exception as e:
+        print(f"Wystąpił błąd(tutaj): {e}")
+
+
+def compile_and_save_temperature(program_index, temperature,  filename='programs_temperature/program_1.py', output_filename="measurements_temperature.json"):
+    try:
+        # Wczytanie kodu źródłowego
+        with open(filename, 'r') as file:
+            source_code = file.read()
+
+        # Uruchomienie programu i pobranie wyników z kompilatora i LLM
+        result = subprocess.run(['python', filename], capture_output=True, text=True)
+        result_chat_gpt_4o = gpt_4o_code_interpretation_temp(filename, temperature)
+
+        # Przygotowanie danych do zapisu
+        data = {
+            "Date and Time": datetime.now().isoformat(),  # Data i czas wykonania
+            "Program code": source_code,  # Kod programu
+            "Numer programu": program_index,
+            "Temperatura": temperature,
+            "Local run output": result.stdout.strip() if result.returncode == 0 else result.stderr.strip(),   # Lokalne uruchomienie
+            "Chat GPT 4o output": result_chat_gpt_4o,  # Wynik z LLM
+            "Chat GPT 4o correctness": compare_values(result.stdout.strip(), result_chat_gpt_4o) # Wynik True/False porównania kompilacji z wynikiem modelu
         }
 
         # Zapisz dane do pliku JSON

@@ -3,7 +3,7 @@ from huggingface_hub import login
 from huggingface_hub import InferenceClient
 
 # Funkcja odpowiadająca za przekazanie programu do modelu i odeberanie wyjścia tego programu
-def llama_3_1_70B_Ins_code_interpretation():
+def llama_3_1_70B_Ins_code_interpretation(filename = "generated_program.py"):
     # Wprowadź swój klucz API
     api_key_hf = os.getenv("API_KEY_HF")
     login(api_key_hf)
@@ -11,7 +11,7 @@ def llama_3_1_70B_Ins_code_interpretation():
     client = InferenceClient(model="meta-llama/Llama-3.1-70B-Instruct")
 
     try:
-        with open("generated_program.py", "r") as file:
+        with open(filename, "r") as file:
             program_code = file.read()
     except FileNotFoundError:
         print("Plik generated_program.py nie został znaleziony.")

@@ -1,6 +1,6 @@
 import os
 from groq import Groq
-def llama_3_1_8B_code_interpretation():
+def llama_3_1_8B_code_interpretation(filename = "generated_program.py"):
 
     client = Groq(
         # This is the default and can be omitted
@@ -8,7 +8,7 @@ def llama_3_1_8B_code_interpretation():
     )
 
     try:
-        with open("generated_program.py", "r") as file:
+        with open(filename, "r") as file:
             program_code = file.read()
     except FileNotFoundError:
         print("Plik generated_program.py nie został znaleziony.")
