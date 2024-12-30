@@ -1,6 +1,30 @@
+"""
+Filename: main.py
+Description: Program do uruchamiania różnych testów wydajności i poprawności modeli językowych w zależności od zdefiniowanych scenariuszy, takich jak długość programu, liczba operacji, ilość danych, i temperatura modelu. Zapisuje wyniki w plikach JSON.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    python main.py
+    Jest to główny program który łączy ze sobą ucyżcie wszystkich generatorów i funkcji. Jedynie wykresy powinny być uruchamiane osobno.
+
+Requirements:
+    - Python 3.12+
+    - random
+    - generator_math
+    - saving_output
+    - generate_frankenstein
+    - test_temperature
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
+
 from generator_math import generate_math_1, program_functions_math
 from saving_output import save_to_json, compile_and_save_to_json, compile_and_save_frankenstein
 from generate_frankenstein import generate_frankenstein_program
+from test_temperature import run_generator_temperature
 import random
 
 
@@ -111,6 +135,8 @@ print("3) Testowanie tego samego programu")
 print("4) Generuj program dla 3 testu")
 print("5) Wpływ ilości opracji frankenstein")
 print("6) Wpływ ilości danych frankenstein")
+print("7) Wpływ temperatury modelu (GPT-4o)")
+
 while True:
     try:
         choose_test = int(input("Podaj numer testu z listy który chciałbyś uruchomić: "))
@@ -159,5 +185,11 @@ match choose_test:
         run_generator_4_frankenstein_operations()
     case 6:
         run_generator_5_frankenstein_data()
+    case 7:
+        table_temperature = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8]
+        table_programs = ["programs_temperature/program_1.py", "programs_temperature/program_2.py",
+                          "programs_temperature/program_3.py"]
+
+        run_generator_temperature(table_programs, table_temperature)
     case _:
         print("Niepoprawna opcja")

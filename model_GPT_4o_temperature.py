@@ -1,3 +1,20 @@
+"""
+Filename: model_GPT_4o_temperature.py
+Description: Program analizujący wyjście terminala dla kodu przekazanego do modelu GPT-4o.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    part of the Spaghetti Metrics
+
+Requirements:
+    - Python 3.12+
+    - openai 1.54.3
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
 import openai
 import os
 

@@ -7,23 +7,17 @@ def round_if_float(value):
     return value
 
 
-def power(base, exponent):
-    base, exponent = int(str(abs(base))[0]), int(str(abs(exponent))[0])
-    first_number = int(str(base)[0])
-    return base ** exponent
+def euler_totient(n):
+    n = 2 + int(str(abs(n))[0])
+    count = 0
+    for k in range(1, n + 1):
+        if math.gcd(n, k) == 1:
+            count += 1
+    return count
 
 
-def factorial(n):
-    n = int(abs(n))
-    first_number = int(str(n)[0])
-    return math.factorial(first_number)
-
-
-value_1 = 2
-value_2 = 1
-
+value_1 = 5
 result = value_1
 
-result = power(result if int(abs(result)) not in [0, 1] else value_1, value_2)
-result = factorial(result if int(abs(result)) not in [0, 1] else value_1)
+result = euler_totient(result if int(abs(result)) not in [0, 1] else value_1)
 print(result)

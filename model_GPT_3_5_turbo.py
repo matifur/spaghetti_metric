@@ -1,3 +1,19 @@
+"""
+Filename: model_GPT_3.5_turbo.py
+Description: Program analizujący wyjście terminala dla kodu przekazanego do modelu GPT-3.5 Turbo.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    part of the Spaghetti Metrics
+
+Requirements:
+    - Python 3.12+
+    - openai 1.54.3
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
 import openai
 import os
 
@@ -9,7 +25,7 @@ def gpt_3_5_code_interpretation(filename = "generated_program.py"):
 
     # Wczytaj kod z pliku generated_program.py, zachowując formatowanie
     try:
-        with open(filename, "r") as file:
+        with open(filename , "r") as file:
             program_code = file.read()
     except FileNotFoundError:
         print("Plik generated_program.py nie został znaleziony.")

@@ -1,3 +1,22 @@
+"""
+Filename: generate_charts.py
+Description: Program analizujący poprawność wyników różnych modeli językowych w zależności od liczby funkcji w programie. Generuje wykresy na podstawie zapisanych danych w pliku JSON.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    python generate_charts.py
+
+Requirements:
+    - Python 3.12+
+    - json
+    - matplotlib
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
+
 import json
 import matplotlib.pyplot as plt
 
@@ -53,15 +72,15 @@ def plot_data(unique_functions, chatgpt35Turbo_percent, llama_percent, llama_8B_
     # Wykres
     plt.figure(figsize=(10, 6))
 
-    plt.plot(unique_functions, chatgpt35Turbo_percent, marker='o', label="Chat GPT 3.5-Turbo Correctness (%)")
-    plt.plot(unique_functions, llama_percent, marker='s', label="Llama 3.1-70B Ins Correctness (%)")
-    plt.plot(unique_functions, llama_8B_percent, marker='s', label="Llama 3.1-8B Correctness (%)")
-    plt.plot(unique_functions, chatgpt4o_percent, marker='o', label="Chat GPT 4o Correctness (%)")
-    plt.plot(unique_functions, chatgpt4o_mini_percent, marker='o', label="Chat GPT 4o mini Correctness (%)")
+    plt.plot(unique_functions, chatgpt35Turbo_percent, marker='o', label="Chat GPT-3.5 Turbo")
+    plt.plot(unique_functions, llama_percent, marker='s', label="Llama 3.1-70B Instruct")
+    plt.plot(unique_functions, llama_8B_percent, marker='s', label="Llama 3.1-8B")
+    plt.plot(unique_functions, chatgpt4o_percent, marker='o', label="Chat GPT-4o")
+    plt.plot(unique_functions, chatgpt4o_mini_percent, marker='o', label="Chat GPT-4o mini")
 
-    plt.title("Percentage Correctness vs. Number of Functions")
-    plt.xlabel("Number of Functions")
-    plt.ylabel("Correctness (%)")
+    plt.title("Poprawność modeli [%] vs. Długość programu (Ilość funkcji)")
+    plt.xlabel("Ilość funkcji")
+    plt.ylabel("Poprawność modeli [%]")
     plt.legend()
     plt.grid(True)
 

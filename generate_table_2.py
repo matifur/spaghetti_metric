@@ -1,3 +1,22 @@
+"""
+Filename: generate_table_2.py
+Description: Program konwertujący dane z pliku JSON do formatu tabeli CSV, obliczając procent poprawnych odpowiedzi dla różnych modeli i funkcji.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    python generate_table_2.py
+
+Requirements:
+    - Python 3.12+
+    - json
+    - pandas
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
+
 import json
 import pandas as pd
 

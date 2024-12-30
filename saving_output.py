@@ -1,3 +1,23 @@
+"""
+Filename: saving_output.py
+Description: Program porównujący wyniki działania modeli językowych z wynikami kompilatora i zapisujący je do pliku JSON.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    part of the Spaghetti Metrics
+
+Requirements:
+    - Python 3.12+
+    - json
+    - datetime
+    - subprocess
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
+
 import json
 from datetime import datetime
 import subprocess
@@ -145,7 +165,7 @@ def compile_and_save_frankenstein(number_of_data, number_of_operations, filename
         print(f"Wynik zapisano do pliku {output_filename}")
 
     except Exception as e:
-        print(f"Wystąpił błąd(tutaj): {e}")
+        print(f"Wystąpił błąd: {e}")
 
 
 def compile_and_save_temperature(program_index, temperature,  filename='programs_temperature/program_1.py', output_filename="measurements_temperature.json"):

@@ -1,3 +1,22 @@
+"""
+Filename: generator_math.py
+Description: Program generuje kod źródłowy zawierający losowo wybrane funkcje matematyczne oraz sekwencję operacji na wartościach liczbowych. Wynik generowanego programu zapisuje do pliku 'generated_program.py'.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    part of the Spaghetti Metrics
+
+Requirements:
+    - Python 3.12+
+    - math
+    - random
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
+
 import random
 
 # konwencja pisania program_functions:

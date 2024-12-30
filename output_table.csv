@@ -1,0 +1,6 @@
+﻿Nazwa Modelu,square,square_root,sum_numbers,absolute_value,factorial,is_prime,circle_area,power,sine,nth_fibonacci,catalan_number,stirling_second_kind,bernoulli_number,euler_mascheroni,harmonic_number,fibonacci_binet,riemann_zeta,pi_leibniz,stirling_first_kind,euler_number,ln2_taylor,e_approximation,binomial_coefficient,euler_polynomial,pi_nilakantha,partial_harmonic_sum,taylor_expansion_exp,euler_totient
+Chat GPT 3.5-Turbo,100.0,100.0,100.0,100.0,94.12,82.35,82.35,47.06,29.41,88.24,58.82,0.0,29.41,0.0,58.82,82.35,17.65,0.0,0.0,0.0,0.0,35.29,23.53,5.88,56.25,52.94,0.0,17.65
+Llama 3.1-70B Ins,88.24,76.47,94.12,100.0,35.29,70.59,23.53,5.88,11.76,88.24,35.29,29.41,11.76,0.0,17.65,94.12,23.53,0.0,11.76,0.0,0.0,41.18,41.18,5.88,81.25,47.06,0.0,11.76
+Llama 3.1-8B,94.12,29.41,70.59,100.0,47.06,100.0,29.41,23.53,5.88,11.76,35.29,5.88,29.41,0.0,0.0,47.06,5.88,0.0,5.88,0.0,0.0,5.88,0.0,0.0,75.0,0.0,11.76,35.29
+Chat GPT 4o,100.0,100.0,100.0,100.0,100.0,100.0,100.0,58.82,100.0,100.0,100.0,35.29,82.35,5.88,94.12,100.0,47.06,23.53,23.53,0.0,0.0,70.59,82.35,23.53,12.5,76.47,11.76,23.53
+Chat GPT 4o mini,100.0,100.0,100.0,100.0,100.0,76.47,94.12,64.71,0.0,100.0,76.47,29.41,76.47,0.0,76.47,94.12,11.76,0.0,0.0,0.0,0.0,23.53,94.12,17.65,62.5,58.82,5.88,35.29

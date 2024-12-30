@@ -1,3 +1,23 @@
+"""
+Filename: generate_charts_frankenstein.py
+Description: Program analizujący poprawność wyników różnych modeli językowych w zależności od liczby operacji i danych w programach frankensteinowych. Generuje wykresy na podstawie zapisanych danych w plikach JSON.
+Author: Mateusz Furgała
+Date: 2024-12-30
+
+Usage:
+    python generate_charts_frankenstein.py
+
+Requirements:
+    - Python 3.12+
+    - json
+    - pandas
+    - matplotlib
+
+License:
+    All Rights Reserved - This code is the intellectual property of Mateusz Furgała.
+"""
+
+
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -40,17 +60,18 @@ def process_data(data, key_variable):
 
     return grouped, models
 
-def plot_data(grouped_data, models, x_label, title, ax):
+def plot_data(grouped_data, models, x_label, title):
     """Plot the data."""
+    plt.figure(figsize=(8, 6))  # Create a new figure for each plot
     for model in models:
         if model in grouped_data.columns:
-            ax.plot(grouped_data.index, grouped_data[model], label=model, marker='o')
+            plt.plot(grouped_data.index, grouped_data[model], label=model, marker='o')
 
-    ax.set_xlabel(x_label)
-    ax.set_ylabel("Percentage of Correct Answers (%)")
-    ax.set_title(title)
-    ax.legend()
-    ax.grid(True)
+    plt.xlabel(x_label)
+    plt.ylabel("Poprawność modeli [%]")
+    plt.title(title)
+    plt.legend()
+    plt.grid(True)
 
 def main():
     # Load data
@@ -64,15 +85,16 @@ def main():
     grouped_operations, models_operations = process_data(operations_data, "Liczba operacji")
     grouped_data, models_data = process_data(data_data, "Liczba danych")
 
-    # Create subplots for both plots
-    fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+    # Plot data for operations
+    plot_data(grouped_operations, models_operations, "Liczba operacji", "Poprawność modeli [%] vs. Liczba operacji")
 
-    # Plot data
-    plot_data(grouped_operations, models_operations, "Liczba operacji", "Model Accuracy vs Liczba operacji", axes[0])
-    plot_data(grouped_data, models_data, "Liczba danych", "Model Accuracy vs Liczba danych", axes[1])
+    # Show first plot
+    plt.show()
 
-    # Show plots
-    plt.tight_layout()
+    # Plot data for data
+    plot_data(grouped_data, models_data, "Liczba danych", "Poprawność modeli [%] vs. Liczba danych")
+
+    # Show second plot
     plt.show()
 
 if __name__ == "__main__":
